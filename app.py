@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain.agents import Tool, AgentExecutor
 from langchain_experimental.utilities import PythonREPL
-from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_cohere.react_multi_hop.agent import create_cohere_react_agent
 from langchain_core.prompts import ChatPromptTemplate
 import pandas as pd
@@ -141,32 +140,13 @@ if st.session_state['cohere_api_key'] and st.session_state['tavily_api_key']:
     internet_search.name = "internet_search"
     internet_search.description = "Returns a list of relevant documents from the internet."
 
-    # Pydantic model for internet search
-    class TavilySearchInput(BaseModel):
-        query: str = Field(description="Internet query engine.")
-
-    internet_search.args_schema = TavilySearchInput
-
     # Initialize Python REPL tool
     python_repl = PythonREPL()
     repl_tool = Tool(
-        name="python_repl",
+        name="python_interpreter",
         description="Executes python code and returns the result.",
         func=python_repl.run,
     )
-
-    repl_tool.name = "python_interpreter"
-
-    # Pydantic model for Python REPL
-    class ToolInput(BaseModel):
-        code: str = Field(description="Python code execution.")
-
-        # Convert to a class method
-        @classmethod
-        def model_json_schema(cls):
-            return cls.schema_json()
-
-    repl_tool.args_schema = ToolInput
 
     # Add data source selection
     st.markdown("<h2 class='sub-header'>📊 Choose Your Data Source</h2>", unsafe_allow_html=True)
