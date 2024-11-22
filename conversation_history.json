@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2024-11-22T21:55:12.846611",
+    "conversation_id": "20241122_215350",
+    "user_query": "create a chart for Unit Cost of each Item",
+    "agent_data": "Here's a chart showing the unit cost of each item:\n\n! [Unit Cost by Item]('charts/unit_cost_by_item.png')",
+    "charts_generated": [
+      "unit_cost_by_item.png"
+    ]
+  },
+  {
+    "timestamp": "2024-11-22T21:56:07.922341",
+    "conversation_id": "20241122_215350",
+    "user_query": "create a chart for Unit Cost of each Iphone model in India",
+    "agent_data": "Here is a chart showing the unit cost of each iPhone model in India:\n\n! [Unit Cost of iPhones in India]('charts/iphone_unit_cost_india.png')",
+    "charts_generated": [
+      "iphone_unit_cost_india.png"
+    ]
+  },
+  {
+    "timestamp": "2024-11-23T01:44:11.376401",
+    "conversation_id": "20241123_014329",
+    "user_query": "Create a chart showing global temperature changes over the last 50 years",
+    "agent_data": "Here's a chart showing global temperature changes over the last 50 years, based on data from climate.gov:\n\n! [Global Temperature Changes](charts/global_temperature_changes.png)",
+    "charts_generated": [
+      "global_temperature_changes.png"
+    ]
+  },
+  {
+    "timestamp": "2024-11-23T01:45:45.997343",
+    "conversation_id": "20241123_014508",
+    "user_query": "Create a chart showing global temperature changes over the last 50 years",
+    "agent_data": "Unfortunately, I encountered an error when trying to load the data. Here's the error message:\n\n```\nHTTPError 404: 'Not Found'>\n```\n\nI'll try to find another dataset and let you know if I'm successful.",
+    "charts_generated": []
+  }
+]
