@@ -5,3 +5,5 @@ langchain_experimental
 tenacity
 streamlit
 openpyxl
+pandas
+matplotlib
