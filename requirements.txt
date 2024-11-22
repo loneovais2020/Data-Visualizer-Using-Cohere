@@ -4,3 +4,4 @@ langchain_cohere
 langchain_experimental
 tenacity
 streamlit
+openpyxl
