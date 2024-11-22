@@ -200,7 +200,40 @@ if st.session_state['cohere_api_key'] and st.session_state['tavily_api_key']:
     os.makedirs('charts', exist_ok=True)
 
     # Create the agent
-    prompt_template = """You are a data visualization expert. The user has requested: '{input}'
+    web_search_prompt = """You are a data visualization expert. The user has requested: '{input}'
+
+    {context}
+
+    Your task is to:
+    1. Search for relevant data using the internet_search tool
+    2. Extract and structure the data into a pandas DataFrame
+    3. Create appropriate visualizations using matplotlib/seaborn
+    4. Save the charts following these instructions:
+
+    IMPORTANT - Chart Saving Instructions:
+    - ALWAYS save charts to the 'charts' directory using:
+        ```python
+        # Create directory if it doesn't exist
+        import os
+        os.makedirs('charts', exist_ok=True)
+        
+        # Save the chart
+        plt.savefig('charts/output.png', bbox_inches='tight', dpi=300)
+        plt.close()  # Close the figure to free memory
+        ```
+    - Use descriptive filenames (e.g., 'charts/sales_by_region.png')
+    - Always close figures to prevent memory leaks
+
+    Remember to:
+    - Clean and process the data appropriately
+    - Handle missing values
+    - Create clear, informative visualizations
+    - Add proper labels and titles
+    - Use appropriate color schemes
+    - Explain your visualization choices
+    """
+
+    dataset_prompt = """You are a data visualization expert. The user has requested: '{input}'
 
     {context}
 
@@ -258,6 +291,9 @@ if st.session_state['cohere_api_key'] and st.session_state['tavily_api_key']:
     - ALWAYS save charts in the 'charts' directory
 
     Create the most appropriate visualization based on the available data, even if it differs from the exact request."""
+
+    # Select appropriate prompt based on data source
+    prompt_template = web_search_prompt if data_source == 'Web Search' else dataset_prompt
 
     context = ""
     if data_source == 'Upload Dataset' and file_path:
